@@ -39,22 +39,16 @@ function prependToStandardHistoryFile(str) {
     
     if($.NSFileManager.defaultManager.fileExistsAtPath(standardHistoryFile)) {
       previousContent = $.NSString.stringWithContentsOfFileEncodingError(standardHistoryFile, $.NSUTF8StringEncoding, null);
-      
-      console.log(`str: ${str.length}\nprev: ${previousContent.length}`);
     }
     
     
-    content = sessionContent.stringByAppendingString(previousContent);
-    console.log(`str: ${sessionContent.length}\nprev: ${previousContent.length}\nnew: ${content.length}`);
+    let content = sessionContent.stringByAppendingString(previousContent);
     content.writeToFileAtomicallyEncodingError(standardHistoryFile, true, $.NSUTF8StringEncoding, null);
         
     return true;
     
   } catch (error) {
-    console.log(`Couldn't write file due to ${error}`);
-    
-    try { app.closeAccess(standardHistoryFile); } 
-    catch (error) { console.log(`Couldn't close file due to ${error}'`); }
+    console.log(`Couldn't write file due to ${error}`);    
     return false;
   }
 }
