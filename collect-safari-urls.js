@@ -59,7 +59,7 @@ function run() {
   let session = { title: '', windows: [] };
   
   if( windows && windows.length > 0) {
-    session.title = `${(new Date()).toLocaleString('de-DE', { timeZone: 'UTC'})}`;
+    session.title = `${(new Date()).toISOString()}`;
     
     for(let i = 0; i < windows.length; ++i) {
       let w = windows[i];
