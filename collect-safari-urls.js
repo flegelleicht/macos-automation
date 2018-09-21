@@ -34,15 +34,18 @@ function prependToStandardHistoryFile(str) {
   let standardHistoryFile = '/Users/flegelleicht/.safari-sessions.markdown';
   
   try {
+    let sessionContent = $.NSString.alloc.initWithUTF8String(str);
     let previousContent = '';
     
     if($.NSFileManager.defaultManager.fileExistsAtPath(standardHistoryFile)) {
-      let previousContent = $.NSString.stringWithContentsOfFileEncodingError(standardHistoryFile, $.NSUTF8StringEncoding, null);
+      previousContent = $.NSString.stringWithContentsOfFileEncodingError(standardHistoryFile, $.NSUTF8StringEncoding, null);
+      
+      console.log(`str: ${str.length}\nprev: ${previousContent.length}`);
     }
     
-    let newContent =  `${str}${previousContent}`;
     
-    content = $.NSString.alloc.initWithUTF8String(newContent);
+    content = sessionContent.stringByAppendingString(previousContent);
+    console.log(`str: ${sessionContent.length}\nprev: ${previousContent.length}\nnew: ${content.length}`);
     content.writeToFileAtomicallyEncodingError(standardHistoryFile, true, $.NSUTF8StringEncoding, null);
         
     return true;
