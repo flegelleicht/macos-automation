@@ -13,11 +13,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 EOB
 
-body = "<p>#{body.split("\n\n").join('</p><p>')}</p>"
-
 html_body = File.read('index.html')
               .sub('{{{SUBJECT}}}', subject)
-              .sub('{{{BODY}}}', body)
+              .sub('{{{BODY}}}', "<p>#{body.split("\n\n").join('</p><p>')}</p>")
 
 options = {
   :address              => 'smtp.gmail.com',
