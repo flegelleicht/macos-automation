@@ -70,7 +70,12 @@ function run() {
       for(let j = 0; j < tabs.length; ++j) {
         let t = tabs[j];
         let session_t = { name: null, url: null};
-        session_t.name = t.name();
+        session_t.name = t.name()
+                          .replace(/&/g, "&amp;")
+                          .replace(/</g, "&lt;")
+                          .replace(/>/g, "&gt;")
+                          .replace(/"/g, "&quot;")
+                          .replace(/'/g, "&#039;");
         session_t.url = t.url();
         session_w.tabs.push(session_t);        
       }
